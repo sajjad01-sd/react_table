@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import SortingTable from './components/SortingTable'
+import RowSelection from './components/RowSelection';
+
 
 function App() {
   return (
     <div className="App">
-     <SortingTable/>
+     <RowSelection/>
     </div>
   );
 }
