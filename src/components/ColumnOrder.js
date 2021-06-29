@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
-import { useFilters, useGlobalFilter, usePagination, useTable, useRowSelect } from "react-table";
+import { useFilters, useGlobalFilter, usePagination, useTable, useRowSelect, useColumnOrder } from "react-table";
 import MOCK_DATA from "./MOCK_DATA.json";
 import { Column,GroupColumn } from "./column";
 import './table.css'
 import { GlobalFilter } from "./GlobalFilter";
 import { Checkbox } from "./Checkbox";
 
-export default function RowSelection() {
+export default function ColumnOrder() {
   const columns = useMemo(() => Column, []);
   const data = useMemo(() => MOCK_DATA, []);
   const tableInstance = useTable({
@@ -18,6 +18,7 @@ export default function RowSelection() {
   useFilters,
   useGlobalFilter,
   usePagination,
+  useColumnOrder,
   useRowSelect,
   hooks => {
     hooks.visibleColumns.push(columns => [
@@ -33,16 +34,25 @@ export default function RowSelection() {
   }
   );
   
+  const changeOrder = () => {
+      setColumnOrder([
+          "id",
+          "first_name",
+          "last_name",
+          "phone",
+          "country",
+          "date_of_birth"
+      ])
+  }
 
-  const {getTableProps, getTableBodyProps, headerGroups,page,nextPage,previousPage,canNextPage,canPreviousPage,prepareRow,state,setGlobalFilter,pageOptions,gotoPage,pageCount,setPageSize,selectedFlatRows} = tableInstance
+  const {getTableProps, getTableBodyProps, headerGroups,page,nextPage,previousPage,canNextPage,canPreviousPage,prepareRow,state,setGlobalFilter,pageOptions,gotoPage,pageCount,setPageSize,selectedFlatRows, setColumnOrder} = tableInstance
 
   const {globalfilter,pageIndex,pageSize} = state;
   return (
-      
+      <>
+            <button onClick={changeOrder}>Change column order</button>
     <div>
         <GlobalFilter filter={globalfilter} setFilter={setGlobalFilter}/>
-
-        <div>
           <table {...getTableProps}>
             <thead>
               {headerGroups.map((headerGroups) => (
@@ -104,7 +114,7 @@ export default function RowSelection() {
             <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
             <button onClick={() => nextPage()}disabled={!canNextPage}>Next</button>
             <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
-        </div>
     </div>
+    </>
   );
 }

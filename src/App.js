@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import RowSelection from './components/RowSelection';
+import ColumnHidding from './components/ColumnHidding';
+import ColumnOrder from './components/ColumnOrder';
 
 
 function App() {
   return (
     <div className="App">
-     <RowSelection/>
+     <ColumnHidding/>
     </div>
   );
 }
