@@ -1,1 +1,1 @@
-Last i work on RowSelection
+Last i work on ColumnHidding and fixing sent string system for query.

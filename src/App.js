@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import ColumnHidding from './components/ColumnHidding';
 import ColumnOrder from './components/ColumnOrder';

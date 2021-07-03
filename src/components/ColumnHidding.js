@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useFilters, useGlobalFilter, usePagination, useTable, useRowSelect, useColumnOrder } from "react-table";
 import MOCK_DATA from "./MOCK_DATA.json";
 import { Column,GroupColumn } from "./column";
@@ -51,7 +51,18 @@ export default function ColumnHidding() {
   const {getTableProps, getTableBodyProps, headerGroups,page,nextPage,previousPage,canNextPage,canPreviousPage,prepareRow,state,setGlobalFilter,pageOptions,gotoPage,pageCount,setPageSize,selectedFlatRows, setColumnOrder,allColumns,getToggleHideAllColumnsProps} = tableInstance
 
   const {globalfilter,pageIndex,pageSize} = state;
+  let valueChecking = []
 
+  // i am using useEffect here, because of solving the column.filterValue showing undefined problem.
+  useEffect(() => {
+    // console.log(valueChecking)
+    const mainValueforfilter = valueChecking.map((e) => {
+      return e
+        
+    })
+    console.log(mainValueforfilter)
+  }, [valueChecking])
+  
   return (
       
       <div>
@@ -80,6 +91,7 @@ export default function ColumnHidding() {
                     <tr {...headerGroups.getHeaderGroupProps()}>
                     {headerGroups.headers.map((column) => (
                       <th {...column.getHeaderProps()}>{column.render('Header')}
+                      {valueChecking.push(column.filterValue)}
                       <div>{column.canFilter ? column.render('Filter') : null}</div>
                       </th>
                     ))}
